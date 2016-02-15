@@ -34,13 +34,16 @@ li.ui-state-default:last-child {
     padding: 10px 20px;
 }
 
-#done-items li {
+.task-items li {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+}
+
+.task-items.doneTasks li {
     text-decoration: line-through;
 }
 
-#done-items li:last-child {
+.task-items li:last-child {
     border-bottom: none;
 }
 
