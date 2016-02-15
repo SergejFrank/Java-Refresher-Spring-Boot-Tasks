@@ -1,14 +1,15 @@
 package de.otto.refresher;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/")
@@ -39,7 +40,7 @@ public class WelcomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String greetingForm(Model model) {
+    public String taskForm(Model model) {
         model.addAttribute("notDoneTasks", getNotDoneTasks());
         model.addAttribute("doneTasks", getDoneTasks());
         model.addAttribute("newTask", new Task());
@@ -47,12 +48,20 @@ public class WelcomeController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String greetingSubmit(@ModelAttribute Task task, Model model) {
-        model.addAttribute("newTask", task);
+    public String taskSubmit(@ModelAttribute Task task, Model model) {
         task.setCreatedOn(new Date());
         tasks.add(task);
-        model.addAttribute("notDoneTasks", getNotDoneTasks());
-        model.addAttribute("doneTasks", getDoneTasks());
-        return "tasks";
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/done", method = RequestMethod.POST)
+    public String setTaskDone(@RequestParam("id") String stringId, Model model) {
+        long id = Long.parseLong(stringId.replaceAll(",", ""));
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.setDone(true);
+            }
+        }
+        return "redirect:/";
     }
 }

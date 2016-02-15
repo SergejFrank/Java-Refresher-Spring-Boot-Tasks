@@ -20,7 +20,11 @@
         <#list notDoneTasks as notDoneTask>
             <li class="ui-state-default">
                 <div class="checkbox"><label>
-                    <input type="checkbox" value="" checked="checked">${notDoneTask.message}</label>
+                    <form action="/done" method="POST">
+                        <input type="hidden" name="id" value="${notDoneTask.id}">
+                        <button type="submit">Done</button>
+                    </form>
+                   ${notDoneTask.message}</label>
                 </div>
             </li>
         </#list>
@@ -37,9 +41,9 @@
         <h1>Already Done</h1>
         <ul id="done-items" class="list-unstyled">
 
-        <#list doneTasks as notDoneTask>
+        <#list doneTasks as doneTask>
             <li>
-                >${doneTasks.message}
+            ${doneTask.message}
                 <button class="remove-item btn btn-default btn-xs pull-right"><span
                         class="glyphicon glyphicon-remove"></span>
                 </button>
