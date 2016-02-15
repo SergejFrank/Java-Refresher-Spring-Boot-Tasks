@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/")
@@ -40,17 +41,22 @@ public class WelcomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String taskForm(Model model) {
+    public String taskForm(Model model, RedirectAttributes attr) {
         model.addAttribute("notDoneTasks", getNotDoneTasks());
         model.addAttribute("doneTasks", getDoneTasks());
         model.addAttribute("newTask", new Task());
+        model.addAllAttributes(attr.getFlashAttributes());
         return "tasks";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute Task task, Model model) {
+    public String taskSubmit(@ModelAttribute Task task, Model model, RedirectAttributes attr) {
         task.setCreatedOn(new Date());
-        tasks.put(task.getId(), task);
+        if (!task.getMessage().trim().equals("")) {
+            tasks.put(task.getId(), task);
+        } else {
+            attr.addFlashAttribute("addTaskError", true);
+        }
         return "redirect:/";
     }
 
