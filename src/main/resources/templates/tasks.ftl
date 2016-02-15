@@ -13,7 +13,13 @@
         <h1>Todos</h1>
 
     <#include "taskInputField.ftl">
-
+    <#if addTaskError??>
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Enter a valid email address
+        </div>
+    </#if>
 
         <ul class="list-unstyled task-items">
 
