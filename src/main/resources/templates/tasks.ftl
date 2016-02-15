@@ -8,57 +8,59 @@
 </head>
 <body>
 
-<div class="col-md-6">
-    <div class="todolist not-done">
-        <h1>Todos</h1>
 
-    <#include "taskInputField.ftl">
+<div class="flex-row">
+    <div class="col-md-6 flex">
+        <div class="todolist not-done">
+            <h1>Todos</h1>
+
+        <#include "taskInputField.ftl">
 
 
-        <ul class="list-unstyled task-items">
+            <ul class="list-unstyled task-items">
 
-        <#list notDoneTasks?values as notDoneTask>
-            <form action="/done" method="POST">
-                <li>
-                ${notDoneTask.message}
-                    <input type="hidden" name="id" value="${notDoneTask.id?c}">
-                    <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
-                            class="glyphicon glyphicon-ok"></span>
-                    </button>
-                </li>
-            </form>
-        </#list>
-        </ul>
-        <div class="todo-footer">
-            <strong><span class="count-todos">${notDoneTasks?size}</span></strong> Tasks Left
+            <#list notDoneTasks?values as notDoneTask>
+                <form action="/done" method="POST">
+                    <li>
+                    ${notDoneTask.message}
+                        <input type="hidden" name="id" value="${notDoneTask.id?c}">
+                        <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
+                                class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </li>
+                </form>
+            </#list>
+            </ul>
+            <div class="todo-footer">
+                <strong><span class="count-todos">${notDoneTasks?size}</span></strong> Tasks Left
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="col-md-6">
-    <div class="todolist">
-        <h1>Already Done</h1>
-        <ul class="list-unstyled task-items doneTasks">
+    <div class="col-md-6 flex">
+        <div class="todolist">
+            <h1>Already Done</h1>
+            <ul class="list-unstyled task-items doneTasks">
 
-        <#list doneTasks?values as doneTask>
-            <form action="/del" method="POST">
-                <li>
-                ${doneTask.message}
-                    <input type="hidden" name="id" value="${doneTask.id?c}">
-                    <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
-                            class="glyphicon glyphicon-remove"></span>
-                    </button>
+            <#list doneTasks?values as doneTask>
+                <form action="/del" method="POST">
+                    <li>
+                    ${doneTask.message}
+                        <input type="hidden" name="id" value="${doneTask.id?c}">
+                        <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
+                                class="glyphicon glyphicon-remove"></span>
+                        </button>
 
-                </li>
-            </form>
-        </#list>
-        </ul>
-        <div class="todo-footer">
-            <strong><span class="count-todos">${doneTasks?size}</span></strong> Tasks accomplished
+                    </li>
+                </form>
+            </#list>
+            </ul>
+            <div class="todo-footer">
+                <strong><span class="count-todos">${doneTasks?size}</span></strong> Tasks accomplished
+            </div>
         </div>
     </div>
-</div>
 
 </div>
 
