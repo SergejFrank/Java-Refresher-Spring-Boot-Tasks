@@ -2,9 +2,7 @@
 
 <html lang="en">
 <head>
-<#include "bootstrap.ftl">
-
-    <link href="/css/tasks.css" rel="stylesheet" type="text/css">
+<#include "head.ftl">
 </head>
 <body>
 
