@@ -7,24 +7,26 @@
     <link href="/css/tasks.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<#include "taskInputField.ftl">
+
 <div class="col-md-6">
     <div class="todolist not-done">
         <h1>Todos</h1>
-        <input type="text" class="form-control add-todo" placeholder="Add todo">
-        <button id="checkAll" class="btn btn-success">Mark all as done</button>
+
+    <#include "taskInputField.ftl">
 
         <hr>
         <ul id="sortable" class="list-unstyled ui-sortable">
 
         <#list notDoneTasks as notDoneTask>
             <li class="ui-state-default">
-                <div class="checkbox"><label><input type="checkbox" value="">${notDoneTask.message}</label></div>
+                <div class="checkbox"><label>
+                    <input type="checkbox" value="" checked="checked">${notDoneTask.message}</label>
+                </div>
             </li>
         </#list>
         </ul>
         <div class="todo-footer">
-            <strong><span class="count-todos">4</span></strong> Items Left
+            <strong><span class="count-todos">${notDoneTasks?size}</span></strong> Items Left
         </div>
     </div>
 </div>
@@ -34,11 +36,16 @@
     <div class="todolist">
         <h1>Already Done</h1>
         <ul id="done-items" class="list-unstyled">
-            <li>Some item
+
+        <#list doneTasks as notDoneTask>
+            <li>
+                >${doneTasks.message}
                 <button class="remove-item btn btn-default btn-xs pull-right"><span
                         class="glyphicon glyphicon-remove"></span>
                 </button>
             </li>
+        </#list>
+
 
         </ul>
     </div>
