@@ -1,6 +1,4 @@
 .idea
-.mvn
 target
 Java-Refresher-Spring-Boot.iml
-mvnw
-mvnw.cmd
+
