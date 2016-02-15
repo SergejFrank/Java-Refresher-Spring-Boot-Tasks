@@ -1,5 +1,8 @@
 package de.otto.refresher;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Date;
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/")
@@ -62,15 +62,13 @@ public class WelcomeController {
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
     public String setTaskDone(@RequestParam("id") String stringId, Model model) {
-        long id = Long.parseLong(stringId);
-        tasks.get(id).setDone(true);
+        tasks.get(Long.parseLong(stringId)).setDone(true);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public String removeTask(@RequestParam("id") String stringId, Model model) {
-        long id = Long.parseLong(stringId);
-        tasks.remove(id);
+        tasks.remove(Long.parseLong(stringId));
         return "redirect:/";
     }
 }
