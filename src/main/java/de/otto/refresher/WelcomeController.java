@@ -60,4 +60,11 @@ public class WelcomeController {
         tasks.get(id).setDone(true);
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    public String removeTask(@RequestParam("id") String stringId, Model model) {
+        long id = Long.parseLong(stringId);
+        tasks.remove(id);
+        return "redirect:/";
+    }
 }
