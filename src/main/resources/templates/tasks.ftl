@@ -21,7 +21,7 @@
             <li class="ui-state-default">
                 <div class="checkbox"><label>
                     <form action="/done" method="POST">
-                        <input type="hidden" name="id" value="${notDoneTask.id}">
+                        <input type="hidden" name="id" value="${notDoneTask.id?c}">
                         <button type="submit">Done</button>
                     </form>
                    ${notDoneTask.message}</label>
