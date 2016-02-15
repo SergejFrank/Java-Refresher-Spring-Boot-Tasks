@@ -56,7 +56,7 @@ public class WelcomeController {
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
     public String setTaskDone(@RequestParam("id") String stringId, Model model) {
-        long id = Long.parseLong(stringId.replaceAll(",", ""));
+        long id = Long.parseLong(stringId.replaceAll(",", "").replaceAll(".",""));
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setDone(true);
