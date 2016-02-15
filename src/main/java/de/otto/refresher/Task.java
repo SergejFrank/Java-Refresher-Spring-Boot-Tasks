@@ -14,9 +14,11 @@ public class Task {
     private Date finishedOn;
     private Date dueTo;
 
+    public Task() {
+        this.done = false;
+    }
     public Task(String message) {
         this.done = false;
-        this.createdOn = new Date();
         this.message = message;
     }
 
