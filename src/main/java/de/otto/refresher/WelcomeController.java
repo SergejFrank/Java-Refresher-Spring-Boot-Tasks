@@ -1,6 +1,5 @@
 package de.otto.refresher;
 
-import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +15,8 @@ public class WelcomeController {
 
     @RequestMapping
     public String welcome(Map<String, Object> model) {
-        model.put("time", new Date());
-        model.put("message", this.message);
+        //model.put("time", new Date());
+        //model.put("message", this.message);
         return "tasks";
     }
 }
