@@ -18,16 +18,13 @@ public class Task {
     public Task() {
         this.done = false;
         this.id = UUID.randomUUID().getMostSignificantBits();
-        System.out.printf(id + "");
     }
 
     public Task(String message) {
         this.done = false;
         this.message = message;
         this.id = UUID.randomUUID().getMostSignificantBits();
-        System.out.printf(id + "");
     }
-
 
 
     public long getId() {
@@ -37,7 +34,6 @@ public class Task {
     public void setId(long id) {
         this.id = id;
     }
-
 
 
     public String getMessage() {
