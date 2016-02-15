@@ -17,7 +17,7 @@
         <hr>
         <ul id="sortable" class="list-unstyled ui-sortable">
 
-        <#list notDoneTasks as notDoneTask>
+        <#list notDoneTasks?values as notDoneTask>
             <li class="ui-state-default">
                 <div class="checkbox"><label>
                     <form action="/done" method="POST">
@@ -41,7 +41,7 @@
         <h1>Already Done</h1>
         <ul id="done-items" class="list-unstyled">
 
-        <#list doneTasks as doneTask>
+        <#list doneTasks?values as doneTask>
             <li>
             ${doneTask.message}
                 <button class="remove-item btn btn-default btn-xs pull-right"><span

@@ -1,5 +1,9 @@
 package de.otto.refresher;
 
+import java.util.HashMap;
+
+
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Date;
 
 
 @Controller
@@ -18,26 +20,26 @@ public class WelcomeController {
 
     @Value("${application.message}")
     private String message;
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private HashMap<Long, Task> tasks = new HashMap<Long, Task>();
 
-    private ArrayList<Task> getNotDoneTasks() {
-        ArrayList<Task> notDoneTasks = new ArrayList<>();
-        for (Task task : tasks) {
+    private HashMap<Long, Task> getNotDoneTasks() {
+        HashMap<Long, Task> notDoneTasks = new HashMap<Long, Task>();
+        for (Task task : tasks.values()) {
             if (!task.isDone()) {
-                notDoneTasks.add(task);
+                notDoneTasks.put(task.getId(), task);
             }
         }
         return notDoneTasks;
     }
 
-    private ArrayList<Task> getDoneTasks() {
-        ArrayList<Task> doneTasks = new ArrayList<>();
-        for (Task task : tasks) {
+    private HashMap<Long, Task> getDoneTasks() {
+        HashMap<Long, Task> notDoneTasks = new HashMap<Long, Task>();
+        for (Task task : tasks.values()) {
             if (task.isDone()) {
-                doneTasks.add(task);
+                notDoneTasks.put(task.getId(), task);
             }
         }
-        return doneTasks;
+        return notDoneTasks;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -51,18 +53,14 @@ public class WelcomeController {
     @RequestMapping(method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task, Model model) {
         task.setCreatedOn(new Date());
-        tasks.add(task);
+        tasks.put(task.getId(), task);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
     public String setTaskDone(@RequestParam("id") String stringId, Model model) {
         long id = Long.parseLong(stringId);
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                task.setDone(true);
-            }
-        }
+        tasks.get(id).setDone(true);
         return "redirect:/";
     }
 }
