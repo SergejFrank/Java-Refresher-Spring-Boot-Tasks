@@ -1,9 +1,8 @@
 package de.otto.refresher;
 
+import java.util.Date;
 import java.util.HashMap;
 
-
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 
 @Controller
 @RequestMapping("/")
@@ -33,13 +30,13 @@ public class WelcomeController {
     }
 
     private HashMap<Long, Task> getDoneTasks() {
-        HashMap<Long, Task> notDoneTasks = new HashMap<Long, Task>();
+        HashMap<Long, Task> doneTasks = new HashMap<Long, Task>();
         for (Task task : tasks.values()) {
             if (task.isDone()) {
-                notDoneTasks.put(task.getId(), task);
+                doneTasks.put(task.getId(), task);
             }
         }
-        return notDoneTasks;
+        return doneTasks;
     }
 
     @RequestMapping(method = RequestMethod.GET)
