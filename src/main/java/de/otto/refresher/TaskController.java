@@ -32,8 +32,8 @@ public class TaskController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task newTask, Model model, RedirectAttributes attr) {
-        newTask.setCreatedOn(new Date());
         if (!newTask.getMessage().trim().isEmpty()) {
+            newTask.setCreatedOn(new Date());
             tasks.put(newTask);
         } else {
             attr.addFlashAttribute("addTaskError", addTaskErrorMessage);

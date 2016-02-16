@@ -26,7 +26,6 @@ public class Task {
         this.message = message;
     }
 
-
     public long getId() {
         return id;
     }
