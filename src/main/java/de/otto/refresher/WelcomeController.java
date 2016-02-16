@@ -30,7 +30,6 @@ public class WelcomeController {
         model.addAttribute("notDoneTasks", tasks.getUndone());
         model.addAttribute("doneTasks", tasks.getDone());
         model.addAttribute("newTask", new Task());
-        model.addAllAttributes(attr.getFlashAttributes());
         return "tasks";
     }
 
