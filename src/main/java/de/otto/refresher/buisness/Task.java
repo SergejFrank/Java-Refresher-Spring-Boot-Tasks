@@ -35,7 +35,6 @@ public class Task {
         this.id = id;
     }
 
-
     public String getMessage() {
         return message;
     }
@@ -48,8 +47,12 @@ public class Task {
         return done;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setDone() {
+        this.done = true;
+    }
+
+    public void setUndone() {
+        this.done = false;
     }
 
     public Date getCreatedOn() {

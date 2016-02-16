@@ -43,7 +43,7 @@ public class TaskController {
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
     public String setTaskDone(@RequestParam("id") String stringId, Model model) {
-        tasks.get(Long.parseLong(stringId)).setDone(true);
+        tasks.get(Long.parseLong(stringId)).setDone();
         return "redirect:/";
     }
 

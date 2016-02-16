@@ -9,11 +9,10 @@ import java.util.HashMap;
 public class TasksMap extends HashMap<Long, Task> {
 
     public TasksMap fillWithTestData() {
-
         Task task5 = new Task("Funktion: Tasks hinzufügen.");
-        task5.setDone(true);
+        task5.setDone();
         Task task6 = new Task("Funktion: Tasks löschen.");
-        task6.setDone(true);
+        task6.setDone();
         this.put(new Task("Security: Nur ein Admin kann einen Task anlegen / löschen"));
         this.put(new Task("Datenbank Anschluss"));
         this.put(new Task("Testing: Schreiben von Selenium / Unit Tests"));
