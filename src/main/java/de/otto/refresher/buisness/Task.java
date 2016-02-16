@@ -1,4 +1,4 @@
-package de.otto.refresher;
+package de.otto.refresher.buisness;
 
 import java.util.Date;
 import java.util.UUID;

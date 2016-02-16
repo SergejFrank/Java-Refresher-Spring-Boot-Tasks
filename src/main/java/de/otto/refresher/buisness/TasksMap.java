@@ -1,7 +1,5 @@
 package de.otto.refresher.buisness;
 
-import de.otto.refresher.Task;
-
 import java.util.HashMap;
 
 /**
@@ -10,18 +8,32 @@ import java.util.HashMap;
  */
 public class TasksMap extends HashMap<Long, Task> {
 
+    public TasksMap() {
+        Task task1 = new Task("Security: Nur ein Admin kann einen Task anlegen / löschen");
+        Task task2 = new Task("Datenbank Anschluss");
+        Task task3 = new Task("Testing: Schreiben von Selenium / Unit Tests");
+        this.put(task1.getId(), task1);
+        this.put(task2.getId(), task2);
+        this.put(task3.getId(), task3);
+    }
+
+
     public TasksMap getUndone() {
-        TasksMap notDoneTasks = new TasksMap();
+        TasksMap undoneTasks = new TasksMap();
+        //todo remove
+        undoneTasks.clear();
         for (Task task : this.values()) {
             if (!task.isDone()) {
-                notDoneTasks.put(task.getId(), task);
+                undoneTasks.put(task.getId(), task);
             }
         }
-        return notDoneTasks;
+        return undoneTasks;
     }
 
     public TasksMap getDone() {
         TasksMap doneTasks = new TasksMap();
+        // TODO remove
+        doneTasks.clear();
         for (Task task : this.values()) {
             if (task.isDone()) {
                 doneTasks.put(task.getId(), task);

@@ -1,5 +1,6 @@
 package de.otto.refresher;
 
+import de.otto.refresher.buisness.Task;
 import de.otto.refresher.buisness.TasksMap;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import java.util.Date;
 //todo Database
 //todo selenium tests
 
+//todo: WICHTIG: Neue Tasks sollten ganz unten erscheienen.
+
 @Controller
 @RequestMapping("/")
-public class WelcomeController {
+public class TaskController {
 
     @Value("${application.addTaskErrorMessage}")
     private String addTaskErrorMessage;
