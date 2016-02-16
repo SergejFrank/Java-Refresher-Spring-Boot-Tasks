@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="/add" method="POST">
     <div class="input-group">
     <@spring.bind "newTask"/>
     <@spring.formInput "newTask.message", 'class="form-control add-todo"'/>

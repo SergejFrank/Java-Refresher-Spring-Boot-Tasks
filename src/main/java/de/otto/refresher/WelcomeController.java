@@ -53,7 +53,7 @@ public class WelcomeController {
         return "tasks";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String taskSubmit(@ModelAttribute Task task, Model model, RedirectAttributes attr) {
         task.setCreatedOn(new Date());
         if (!task.getMessage().trim().equals("")) {
