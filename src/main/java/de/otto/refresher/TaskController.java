@@ -13,9 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 
+// ERWEITERUNG FÜR DEN ZWEITEN TAG ALS FREIWÄHLBARE ZUSATZAUFGABE?
 //todo Security: Nur ein Admin kann einen Task anlegen.
 //todo Database
-//todo selenium tests
+//todo selenium /unit tests
 
 //todo: WICHTIG: Neue Tasks sollten ganz unten erscheienen.
 
@@ -25,7 +26,7 @@ public class TaskController {
 
     @Value("${application.addTaskErrorMessage}")
     private String addTaskErrorMessage;
-    private TasksMap tasks = new TasksMap();
+    private TasksMap tasks = new TasksMap().fillWithTestData();
 
 
     @RequestMapping(method = RequestMethod.GET)

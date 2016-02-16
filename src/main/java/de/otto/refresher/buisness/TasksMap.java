@@ -8,20 +8,21 @@ import java.util.HashMap;
  */
 public class TasksMap extends HashMap<Long, Task> {
 
-    public TasksMap() {
+    public TasksMap fillWithTestData() {
         Task task1 = new Task("Security: Nur ein Admin kann einen Task anlegen / löschen");
         Task task2 = new Task("Datenbank Anschluss");
         Task task3 = new Task("Testing: Schreiben von Selenium / Unit Tests");
+        Task task4 = new Task("Neue Task sollen unten erscheinen: -> sort by dates");
         this.put(task1.getId(), task1);
         this.put(task2.getId(), task2);
         this.put(task3.getId(), task3);
+        this.put(task4.getId(), task4);
+        return this;
     }
 
 
     public TasksMap getUndone() {
         TasksMap undoneTasks = new TasksMap();
-        //todo remove
-        undoneTasks.clear();
         for (Task task : this.values()) {
             if (!task.isDone()) {
                 undoneTasks.put(task.getId(), task);
@@ -32,8 +33,6 @@ public class TasksMap extends HashMap<Long, Task> {
 
     public TasksMap getDone() {
         TasksMap doneTasks = new TasksMap();
-        // TODO remove
-        doneTasks.clear();
         for (Task task : this.values()) {
             if (task.isDone()) {
                 doneTasks.put(task.getId(), task);
