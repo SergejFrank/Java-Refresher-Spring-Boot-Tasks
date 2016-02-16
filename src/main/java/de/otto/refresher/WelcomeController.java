@@ -12,6 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Date;
 import java.util.HashMap;
 
+//todo Security: Nur ein Admin kann einen Task anlegen.
+//todo Database
+
 @Controller
 @RequestMapping("/")
 public class WelcomeController {
