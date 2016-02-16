@@ -17,12 +17,12 @@ public class TasksMap extends HashMap<Long, Task> {
         task5.setDone(true);
         Task task6 = new Task("Funktion: Tasks löschen.");
         task6.setDone(true);
-        this.put(task1.getId(), task1);
-        this.put(task2.getId(), task2);
-        this.put(task3.getId(), task3);
-        this.put(task4.getId(), task4);
-        this.put(task5.getId(), task5);
-        this.put(task6.getId(), task6);
+        this.put(task1);
+        this.put(task2);
+        this.put(task3);
+        this.put(task4);
+        this.put(task5);
+        this.put(task6);
         return this;
     }
 
@@ -31,7 +31,7 @@ public class TasksMap extends HashMap<Long, Task> {
         TasksMap undoneTasks = new TasksMap();
         for (Task task : this.values()) {
             if (!task.isDone()) {
-                undoneTasks.put(task.getId(), task);
+                undoneTasks.put(task);
             }
         }
         return undoneTasks;
@@ -41,9 +41,13 @@ public class TasksMap extends HashMap<Long, Task> {
         TasksMap doneTasks = new TasksMap();
         for (Task task : this.values()) {
             if (task.isDone()) {
-                doneTasks.put(task.getId(), task);
+                doneTasks.put(task);
             }
         }
         return doneTasks;
+    }
+
+    public Task put(Task task) {
+        return this.put(task.getId(), task);
     }
 }

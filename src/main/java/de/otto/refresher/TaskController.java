@@ -34,7 +34,7 @@ public class TaskController {
     public String taskSubmit(@ModelAttribute Task task, Model model, RedirectAttributes attr) {
         task.setCreatedOn(new Date());
         if (!task.getMessage().trim().equals("")) {
-            tasks.put(task.getId(), task);
+            tasks.put(task);
         } else {
             attr.addFlashAttribute("addTaskError", addTaskErrorMessage);
         }
