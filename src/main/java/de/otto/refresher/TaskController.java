@@ -13,17 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 
-// ERWEITERUNG FÜR DEN ZWEITEN TAG ALS FREIWÄHLBARE ZUSATZAUFGABE?
-//todo Security: Nur ein Admin kann einen Task anlegen.
-//todo Database
-//todo selenium /unit tests
-
-// WEITERE FUNTIONEN:
-//todo clear all done tasks
-//todo Sortiermaske für ausstehende Tasks
-
-//todo: WICHTIG: Neue Tasks sollten ganz unten erscheienen.
-
 @Controller
 @RequestMapping("/")
 public class TaskController {
