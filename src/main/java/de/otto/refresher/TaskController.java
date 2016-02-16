@@ -31,10 +31,10 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute Task task, Model model, RedirectAttributes attr) {
-        task.setCreatedOn(new Date());
-        if (!task.getMessage().trim().equals("")) {
-            tasks.put(task);
+    public String taskSubmit(@ModelAttribute Task newTask, Model model, RedirectAttributes attr) {
+        newTask.setCreatedOn(new Date());
+        if (!newTask.getMessage().trim().isEmpty()) {
+            tasks.put(newTask);
         } else {
             attr.addFlashAttribute("addTaskError", addTaskErrorMessage);
         }
@@ -42,14 +42,14 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
-    public String setTaskDone(@RequestParam("id") String stringId, Model model) {
-        tasks.get(Long.parseLong(stringId)).setDone();
+    public String setTaskDone(@RequestParam("id") String stringTaskId, Model model) {
+        tasks.get(Long.parseLong(stringTaskId)).setDone();
         return "redirect:/";
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.POST)
-    public String removeTask(@RequestParam("id") String stringId, Model model) {
-        tasks.remove(Long.parseLong(stringId));
+    public String removeTask(@RequestParam("id") String stringTaskId, Model model) {
+        tasks.remove(Long.parseLong(stringTaskId));
         return "redirect:/";
     }
 }
