@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 //todo Security: Nur ein Admin kann einen Task anlegen.
 //todo Database
+//todo tests
 
 @Controller
 @RequestMapping("/")
@@ -21,10 +22,10 @@ public class WelcomeController {
 
     @Value("${application.message}")
     private String message;
-    private HashMap<Long, Task> tasks = new HashMap<Long, Task>();
+    private HashMap<Long, Task> tasks = new HashMap<>();
 
     private HashMap<Long, Task> getNotDoneTasks() {
-        HashMap<Long, Task> notDoneTasks = new HashMap<Long, Task>();
+        HashMap<Long, Task> notDoneTasks = new HashMap<>();
         for (Task task : tasks.values()) {
             if (!task.isDone()) {
                 notDoneTasks.put(task.getId(), task);
@@ -34,7 +35,7 @@ public class WelcomeController {
     }
 
     private HashMap<Long, Task> getDoneTasks() {
-        HashMap<Long, Task> doneTasks = new HashMap<Long, Task>();
+        HashMap<Long, Task> doneTasks = new HashMap<>();
         for (Task task : tasks.values()) {
             if (task.isDone()) {
                 doneTasks.put(task.getId(), task);
