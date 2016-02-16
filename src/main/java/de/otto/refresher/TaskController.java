@@ -18,6 +18,10 @@ import java.util.Date;
 //todo Database
 //todo selenium /unit tests
 
+// WEITERE FUNTIONEN:
+//todo clear all done tasks
+//todo Sortiermaske für ausstehende Tasks
+
 //todo: WICHTIG: Neue Tasks sollten ganz unten erscheienen.
 
 @Controller
