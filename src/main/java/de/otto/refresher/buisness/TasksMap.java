@@ -9,23 +9,19 @@ import java.util.HashMap;
 public class TasksMap extends HashMap<Long, Task> {
 
     public TasksMap fillWithTestData() {
-        Task task1 = new Task("Security: Nur ein Admin kann einen Task anlegen / löschen");
-        Task task2 = new Task("Datenbank Anschluss");
-        Task task3 = new Task("Testing: Schreiben von Selenium / Unit Tests");
-        Task task4 = new Task("Neue Task sollen unten erscheinen: -> sort by dates");
+
         Task task5 = new Task("Funktion: Tasks hinzufügen.");
         task5.setDone(true);
         Task task6 = new Task("Funktion: Tasks löschen.");
         task6.setDone(true);
-        this.put(task1);
-        this.put(task2);
-        this.put(task3);
-        this.put(task4);
+        this.put(new Task("Security: Nur ein Admin kann einen Task anlegen / löschen"));
+        this.put(new Task("Datenbank Anschluss"));
+        this.put(new Task("Testing: Schreiben von Selenium / Unit Tests"));
+        this.put(new Task("Neue Task sollen unten erscheinen: -> sort by dates"));
         this.put(task5);
         this.put(task6);
         return this;
     }
-
 
     public TasksMap getUndone() {
         TasksMap undoneTasks = new TasksMap();
