@@ -7,6 +7,7 @@ import java.util.UUID;
  * Created by Garrit Schröder on 15.02.16.
  * Email: GarritSidney.Schroeder@otto.de
  */
+
 public class Task {
     private long id;
     private String message;
@@ -21,9 +22,8 @@ public class Task {
     }
 
     public Task(String message) {
-        this.done = false;
+        this();
         this.message = message;
-        this.id = UUID.randomUUID().getMostSignificantBits();
     }
 
 
