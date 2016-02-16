@@ -20,8 +20,8 @@ import java.util.HashMap;
 @RequestMapping("/")
 public class WelcomeController {
 
-    @Value("${application.message}")
-    private String message;
+    @Value("${application.addTaskErrorMessage}")
+    private String addTaskErrorMessage;
     private HashMap<Long, Task> tasks = new HashMap<>();
 
     private HashMap<Long, Task> getNotDoneTasks() {
@@ -59,7 +59,7 @@ public class WelcomeController {
         if (!task.getMessage().trim().equals("")) {
             tasks.put(task.getId(), task);
         } else {
-            attr.addFlashAttribute("addTaskError", true);
+            attr.addFlashAttribute("addTaskError", addTaskErrorMessage);
         }
         return "redirect:/";
     }
