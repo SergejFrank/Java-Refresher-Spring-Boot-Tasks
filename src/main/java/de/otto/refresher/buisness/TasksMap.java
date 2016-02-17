@@ -15,7 +15,7 @@ public class TasksMap extends HashMap<Long, Task> {
         task6.setDone();
         this.put(new Task("Security: Nur ein Admin kann einen Task anlegen / löschen"));
         this.put(new Task("Datenbank Anschluss"));
-        this.put(new Task("Testing: Schreiben von Selenium / Unit Tests"));
+        this.put(new Task("Testing: Schreiben von Fluentlenium Tests"));
         this.put(new Task("Neue Task sollen unten erscheinen: -> sort by dates"));
         this.put(task5);
         this.put(task6);
