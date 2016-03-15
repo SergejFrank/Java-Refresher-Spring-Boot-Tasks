@@ -1,12 +1,8 @@
 package de.otto.refresher.buisness;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
-/**
- * Created by Garrit Schröder on 16.02.16.
- * Email: GarritSidney.Schroeder@otto.de
- */
-public class TasksMap extends HashMap<Long, Task> {
+public class TasksMap extends LinkedHashMap<Long, Task> {
 
     public static TasksMap testData() {
         TasksMap taskMap = new TasksMap();
