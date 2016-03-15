@@ -41,9 +41,7 @@ public class Task {
         return status;
     }
 
-    public void setDone() {
-        this.status = TaskStatus.DONE;
-    }
+    public void setDone() { this.status = TaskStatus.DONE; }
 
     public void setUndone() {
         this.status = TaskStatus.TODO;

@@ -23,7 +23,7 @@ public class TaskController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String taskForm(Model model, RedirectAttributes attr) {
+    public String taskForm(Model model) {
         model.addAttribute("notDoneTasks", tasks.getUndone());
         model.addAttribute("doneTasks", tasks.getDone());
         model.addAttribute("newTask", new Task());
@@ -31,7 +31,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String taskSubmit(@ModelAttribute Task newTask, Model model, RedirectAttributes attr) {
+    public String taskSubmit(@ModelAttribute Task newTask, RedirectAttributes attr) {
         if (!newTask.getMessage().trim().isEmpty()) {
             newTask.setCreatedOn(new Date());
             tasks.put(newTask);
@@ -42,13 +42,13 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
-    public String setTaskDone(@RequestParam("id") String stringTaskId, Model model) {
+    public String setTaskDone(@RequestParam("id") String stringTaskId) {
         tasks.get(Long.parseLong(stringTaskId)).setDone();
         return "redirect:/";
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.POST)
-    public String removeTask(@RequestParam("id") String stringTaskId, Model model) {
+    public String removeTask(@RequestParam("id") String stringTaskId) {
         tasks.get(Long.parseLong(stringTaskId)).delete();
         return "redirect:/";
     }
