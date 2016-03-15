@@ -12,13 +12,13 @@ public class Task {
     private Date dueTo;
 
     public Task() {
-        this.status = TaskStatus.TODO;
-        this.id = UUID.randomUUID().getMostSignificantBits();
+        setId(UUID.randomUUID().getMostSignificantBits());
+        setUndone();
     }
 
     public Task(String message) {
         this();
-        this.message = message;
+        setMessage(message);
     }
 
     public long getId() {
@@ -41,10 +41,14 @@ public class Task {
         return status;
     }
 
-    public void setDone() { this.status = TaskStatus.DONE; }
+    public void setDone() {
+        this.status = TaskStatus.DONE;
+        setFinishedOn(new Date());
+    }
 
     public void setUndone() {
         this.status = TaskStatus.TODO;
+        setFinishedOn(null);
     }
 
     public void delete(){ this.status = TaskStatus.DELETED; }
