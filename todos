@@ -2,6 +2,8 @@
 //todo Security: Nur ein Admin kann einen Task anlegen.
 //todo Database
 //todo selenium /unit tests
+//todo multiple lists -> Drag'n'Drop??? (à la trello)
+
 
 // WEITERE FUNTIONEN:
 //todo clear all done tasks

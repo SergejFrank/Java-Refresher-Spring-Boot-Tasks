@@ -19,7 +19,7 @@ public class TaskController {
 
     @Value("${application.addTaskErrorMessage}")
     private String addTaskErrorMessage;
-    private TasksMap tasks = new TasksMap().fillWithTestData();
+    private TasksMap tasks = TasksMap.testData();
 
 
     @RequestMapping(method = RequestMethod.GET)
