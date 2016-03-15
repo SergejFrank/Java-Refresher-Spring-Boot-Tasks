@@ -6,13 +6,13 @@ import java.util.UUID;
 public class Task {
     private long id;
     private String message;
-    private boolean done;
+    private TaskStatus status;
     private Date createdOn;
     private Date finishedOn;
     private Date dueTo;
 
     public Task() {
-        this.done = false;
+        this.status = TaskStatus.TODO;
         this.id = UUID.randomUUID().getMostSignificantBits();
     }
 
@@ -37,17 +37,19 @@ public class Task {
         this.message = message;
     }
 
-    public boolean isDone() {
-        return done;
+    public TaskStatus getStatus() {
+        return status;
     }
 
     public void setDone() {
-        this.done = true;
+        this.status = TaskStatus.DONE;
     }
 
     public void setUndone() {
-        this.done = false;
+        this.status = TaskStatus.TODO;
     }
+
+    public void delete(){ this.status = TaskStatus.DELETED; }
 
     public Date getCreatedOn() {
         return createdOn;

@@ -49,7 +49,7 @@ public class TaskController {
 
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public String removeTask(@RequestParam("id") String stringTaskId, Model model) {
-        tasks.remove(Long.parseLong(stringTaskId));
+        tasks.get(Long.parseLong(stringTaskId)).delete();
         return "redirect:/";
     }
 }

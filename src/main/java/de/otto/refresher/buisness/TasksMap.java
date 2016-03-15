@@ -23,7 +23,7 @@ public class TasksMap extends LinkedHashMap<Long, Task> {
     public TasksMap getUndone() {
         TasksMap undoneTasks = new TasksMap();
         for (Task task : this.values()) {
-            if (!task.isDone()) {
+            if (task.getStatus() == TaskStatus.TODO) {
                 undoneTasks.put(task);
             }
         }
@@ -33,7 +33,7 @@ public class TasksMap extends LinkedHashMap<Long, Task> {
     public TasksMap getDone() {
         TasksMap doneTasks = new TasksMap();
         for (Task task : this.values()) {
-            if (task.isDone()) {
+            if (task.getStatus() == TaskStatus.DONE) {
                 doneTasks.put(task);
             }
         }
