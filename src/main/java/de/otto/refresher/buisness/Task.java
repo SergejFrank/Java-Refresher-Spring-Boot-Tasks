@@ -41,14 +41,10 @@ public class Task {
         return status;
     }
 
-    public void setDone() {
-        this.status = TaskStatus.DONE;
-        setFinishedOn(new Date());
-    }
+    public void setDone() { this.status = TaskStatus.DONE; }
 
     public void setUndone() {
         this.status = TaskStatus.TODO;
-        setFinishedOn(null);
     }
 
     public void delete(){ this.status = TaskStatus.DELETED; }
