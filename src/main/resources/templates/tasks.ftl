@@ -18,7 +18,7 @@
             <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>
-                ${addTaskError}
+            ${addTaskError}
             </div>
         </#if>
 
@@ -63,11 +63,18 @@
             </ul>
             <div class="todo-footer">
                 <strong><span class="count-todos">${doneTasks?size}</span></strong> Tasks accomplished
+                <form action="/delAll" class="pull-right" method="POST">
+                    <button title="Delete All" type="submit"
+                            class="remove-item btn btn-default btn-xs pull-right"><span
+                            class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 
 </div>
+
 
 </body>
 </html>

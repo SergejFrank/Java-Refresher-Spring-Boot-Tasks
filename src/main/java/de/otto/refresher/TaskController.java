@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -58,6 +59,16 @@ public class TaskController {
         Task task = taskRepository.findTaskById(Long.parseLong(stringTaskId));
         task.softDelete();
         taskRepository.save(task);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/delAll", method = RequestMethod.POST)
+    public String removeAllTask() {
+        List<Task> tasks = taskRepository.findTaskByStatus(TaskStatus.DONE);
+        for (Task task : tasks) {
+            task.softDelete();
+            taskRepository.save(task);
+        }
         return "redirect:/";
     }
 }
