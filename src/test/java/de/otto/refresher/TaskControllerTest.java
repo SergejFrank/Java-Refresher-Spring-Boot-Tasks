@@ -19,11 +19,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port:0")
+@IntegrationTest("server.port:8089")
 @TestPropertySource(locations = "classpath:application.properties")
 public class TaskControllerTest extends FluentTest {
 
-    private int serverPort = 8080;
+    @Value("${local.server.port}")
+    private int serverPort;
 
     private WebDriver webDriver = new PhantomJSDriver();
 
@@ -46,7 +47,7 @@ public class TaskControllerTest extends FluentTest {
     public void newTasksCanBeAdded() {
         goTo(url());
         fill(find(".add-todo")).with("FluentLenium");
-        submit("#submit_button");
+        submit("#submit_botton");
         assertThat("d", true);
     }
 }

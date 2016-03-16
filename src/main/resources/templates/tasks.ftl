@@ -26,7 +26,7 @@
 
             <#list notDoneTasks?values as notDoneTask>
                 <form action="/done" method="POST">
-                    <li>
+                    <li class="todo-task">
                     ${notDoneTask.message}
                         <input type="hidden" name="id" value="${notDoneTask.id?c}">
                         <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
@@ -50,7 +50,7 @@
 
             <#list doneTasks?values as doneTask>
                 <form action="/del" method="POST">
-                    <li>
+                    <li class="done-task">
                     ${doneTask.message}
                         <input type="hidden" name="id" value="${doneTask.id?c}">
                         <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span
