@@ -1,7 +1,9 @@
 package de.otto.refresher;
 
 import de.otto.refresher.buisness.Task;
-import de.otto.refresher.buisness.TasksMap;
+import de.otto.refresher.buisness.TaskStatus;
+import de.otto.refresher.database.adapter.TaskRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +21,15 @@ public class TaskController {
 
     @Value("${application.addTaskErrorMessage}")
     private String addTaskErrorMessage;
-    private TasksMap tasks = TasksMap.testData();
+
+    @Autowired
+    private TaskRepository taskRepository;
 
 
     @RequestMapping(method = RequestMethod.GET)
     public String taskForm(Model model) {
-        model.addAttribute("notDoneTasks", tasks.getUndone());
-        model.addAttribute("doneTasks", tasks.getDone());
+        model.addAttribute("notDoneTasks", taskRepository.findTaskByStatus(TaskStatus.TODO));
+        model.addAttribute("doneTasks", taskRepository.findTaskByStatus(TaskStatus.DONE));
         model.addAttribute("newTask", new Task());
         return "tasks";
     }
@@ -34,7 +38,7 @@ public class TaskController {
     public String taskSubmit(@ModelAttribute Task newTask, RedirectAttributes attr) {
         if (!newTask.getMessage().trim().isEmpty()) {
             newTask.setCreatedOn(new Date());
-            tasks.put(newTask);
+            taskRepository.save(newTask);
         } else {
             attr.addFlashAttribute("addTaskError", addTaskErrorMessage);
         }
@@ -43,13 +47,17 @@ public class TaskController {
 
     @RequestMapping(value = "/done", method = RequestMethod.POST)
     public String setTaskDone(@RequestParam("id") String stringTaskId) {
-        tasks.get(Long.parseLong(stringTaskId)).setDone();
+        Task task = taskRepository.findTaskById(Long.parseLong(stringTaskId));
+        task.setDone();
+        taskRepository.save(task);
         return "redirect:/";
     }
 
     @RequestMapping(value = "/del", method = RequestMethod.POST)
     public String removeTask(@RequestParam("id") String stringTaskId) {
-        tasks.get(Long.parseLong(stringTaskId)).delete();
+        Task task = taskRepository.findTaskById(Long.parseLong(stringTaskId));
+        task.softDelete();
+        taskRepository.save(task);
         return "redirect:/";
     }
 }

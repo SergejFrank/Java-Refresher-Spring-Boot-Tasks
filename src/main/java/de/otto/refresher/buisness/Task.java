@@ -1,18 +1,30 @@
 package de.otto.refresher.buisness;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.UUID;
 
+@Entity
+@Table(name = "task")
 public class Task {
+
+    @Id
+    @GeneratedValue
     private long id;
+
     private String message;
+
     private TaskStatus status;
+
     private Date createdOn;
+
     private Date finishedOn;
+
     private Date dueTo;
 
     public Task() {
-        setId(UUID.randomUUID().getMostSignificantBits());
         setUndone();
     }
 
@@ -41,13 +53,17 @@ public class Task {
         return status;
     }
 
-    public void setDone() { this.status = TaskStatus.DONE; }
+    public void setDone() {
+        this.status = TaskStatus.DONE;
+    }
 
     public void setUndone() {
         this.status = TaskStatus.TODO;
     }
 
-    public void delete(){ this.status = TaskStatus.DELETED; }
+    public void softDelete() {
+        this.status = TaskStatus.DELETED;
+    }
 
     public Date getCreatedOn() {
         return createdOn;

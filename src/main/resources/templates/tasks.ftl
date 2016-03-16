@@ -24,7 +24,7 @@
 
             <ul class="list-unstyled task-items">
 
-            <#list notDoneTasks?values as notDoneTask>
+            <#list notDoneTasks as notDoneTask>
                 <form action="/done" method="POST">
                     <li class="todo-task task">
                     ${notDoneTask.message}
@@ -48,7 +48,7 @@
             <h1>Already Done</h1>
             <ul class="list-unstyled task-items doneTasks">
 
-            <#list doneTasks?values as doneTask>
+            <#list doneTasks as doneTask>
                 <form action="/del" method="POST">
                     <li class="done-task task">
                     ${doneTask.message}
