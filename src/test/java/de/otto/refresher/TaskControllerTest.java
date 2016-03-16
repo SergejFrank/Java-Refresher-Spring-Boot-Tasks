@@ -35,9 +35,13 @@ public class TaskControllerTest extends FluentTest {
 
     private WebDriver webDriver = new PhantomJSDriver();
 
+    private String taskCssSelector = "li.task";
+    private String todoTaskCssSelector = "li.todo-task";
+    private String doneTaskCssSelector = "li.done-task";
+
     @Before
     public void setUp() {
-
+        goTo(url());
     }
 
     @Override
@@ -49,60 +53,52 @@ public class TaskControllerTest extends FluentTest {
         return "http://localhost:" + serverPort + "/";
     }
 
-
     @Test
     public void newTasksCanBeAdded() {
-        goTo(url());
-        fill(find(".add-todo")).with("FINDME");
-        submit("#submit_button");
-
-        FluentList<FluentWebElement> webElements = find("li.todo-task");
-        ArrayList<String> todoTasks = new ArrayList<>();
-        for (FluentWebElement element : webElements) {
-            todoTasks.add(element.getText());
-        }
-
-        assertThat(todoTasks, hasItem("FINDME"));
-
+        addNewTask("FINDME");
+        assertThat(getTasksByCSSSelector(todoTaskCssSelector), hasItem("FINDME"));
     }
 
     @Test
     public void setTaskDone() {
-        goTo(url());
-        fill(find(".add-todo")).with("DoneMe");
-        submit("#submit_button");
+        addNewTask("DoneMe");
 
-        FluentList<FluentWebElement> webElements = find("li.todo-task");
-        for (FluentWebElement element : webElements) {
-            if (element.getText().equals("DoneMe")) {
-                element.getElement().findElement( By.cssSelector("button")).click();
-            }
-        }
+        clickButtonByTaskName("DoneMe");
 
-        FluentList<FluentWebElement> webElementsDone = find("li.done-task");
-        ArrayList<String> doneTasks = new ArrayList<>();
-        for (FluentWebElement element : webElementsDone) {
-            if (element.getText().equals("DoneMe")) {
-                doneTasks.add(element.getText());
-            }
-
-        }
-
-        webElements = find("li.todo-task");
-        ArrayList<String> todoTasks = new ArrayList<>();
-        for (FluentWebElement element : webElements) {
-            todoTasks.add(element.getText());
-        }
-
-        assertThat(doneTasks, hasItem("DoneMe"));
-        assertThat(todoTasks, not(hasItem("DoneMe")));
-
+        assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("DoneMe")));
+        assertThat(getTasksByCSSSelector(doneTaskCssSelector), hasItem("DoneMe"));
     }
 
     @Test
     public void deleteTasks() {
-
+        addNewTask("DeleteMe");
+        clickButtonByTaskName("DeleteMe");
+        clickButtonByTaskName("DeleteMe");
+        assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("DeleteMe")));
+        assertThat(getTasksByCSSSelector(doneTaskCssSelector), not(hasItem("DeleteMe")));
     }
 
+    public void addNewTask(String taskName) {
+        fill(find(".add-todo")).with(taskName);
+        submit("#submit_button");
+    }
 
+    public ArrayList<String> getTasksByCSSSelector(String cssSelector) {
+        FluentList<FluentWebElement> webElementsDone = find(cssSelector);
+        ArrayList<String> doneTasks = new ArrayList<>();
+        for (FluentWebElement element : webElementsDone) {
+            doneTasks.add(element.getText());
+        }
+        return doneTasks;
+    }
+
+    public void clickButtonByTaskName(String taskName) {
+        FluentList<FluentWebElement> webElements = find(taskCssSelector);
+        for (FluentWebElement element : webElements) {
+            if (element.getText().equals(taskName)) {
+                element.getElement().findElement(By.cssSelector("button")).click();
+                return;
+            }
+        }
+    }
 }
