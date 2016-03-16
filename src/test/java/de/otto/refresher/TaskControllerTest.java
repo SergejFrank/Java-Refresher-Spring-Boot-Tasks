@@ -55,16 +55,14 @@ public class TaskControllerTest extends FluentTest {
 
     @Test
     public void newTasksCanBeAdded() {
-        addNewTask("FINDME");
-        assertThat(getTasksByCSSSelector(todoTaskCssSelector), hasItem("FINDME"));
+        addNewTask("FindMe");
+        assertThat(getTasksByCSSSelector(todoTaskCssSelector), hasItem("FindMe"));
     }
 
     @Test
     public void setTaskDone() {
         addNewTask("DoneMe");
-
         clickButtonByTaskName("DoneMe");
-
         assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("DoneMe")));
         assertThat(getTasksByCSSSelector(doneTaskCssSelector), hasItem("DoneMe"));
     }
