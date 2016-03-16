@@ -23,8 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @TestPropertySource(locations = "classpath:application.properties")
 public class TaskControllerTest extends FluentTest {
 
-    @Value("${local.server.port}")
-    private int serverPort;
+    private int serverPort = 8080;
 
     private WebDriver webDriver = new PhantomJSDriver();
 
@@ -47,7 +46,7 @@ public class TaskControllerTest extends FluentTest {
     public void newTasksCanBeAdded() {
         goTo(url());
         fill(find(".add-todo")).with("FluentLenium");
-        submit("#submit_botton");
+        submit("#submit_button");
         assertThat("d", true);
     }
 }
