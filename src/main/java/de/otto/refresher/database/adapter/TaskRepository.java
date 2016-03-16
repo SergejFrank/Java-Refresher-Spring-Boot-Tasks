@@ -15,4 +15,8 @@ public interface TaskRepository extends Repository<Task, Long> {
     List<Task> findTaskByStatus(TaskStatus status);
 
     Task findTaskById(Long id);
+
+    void deleteAll();
+
+
 }

@@ -1,9 +1,6 @@
 package de.otto.refresher.buisness;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,6 +13,7 @@ public class Task {
 
     private String message;
 
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
     private Date createdOn;

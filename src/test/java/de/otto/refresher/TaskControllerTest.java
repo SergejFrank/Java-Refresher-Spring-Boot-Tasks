@@ -1,5 +1,6 @@
 package de.otto.refresher;
 
+import de.otto.refresher.database.adapter.TaskRepository;
 import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.domain.FluentList;
 import org.fluentlenium.core.domain.FluentWebElement;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -27,11 +29,14 @@ import static org.hamcrest.core.IsNot.not;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
-@TestPropertySource(locations = "classpath:application.properties")
+@TestPropertySource(locations = "classpath:application_test.properties")
 public class TaskControllerTest extends FluentTest {
 
     @Value("${local.server.port}")
     private int serverPort;
+
+    @Autowired
+    private TaskRepository repository;
 
     private WebDriver webDriver = new PhantomJSDriver();
 
@@ -41,7 +46,9 @@ public class TaskControllerTest extends FluentTest {
 
     @Before
     public void setUp() {
+        repository.deleteAll();
         goTo(url());
+
     }
 
     @Override
