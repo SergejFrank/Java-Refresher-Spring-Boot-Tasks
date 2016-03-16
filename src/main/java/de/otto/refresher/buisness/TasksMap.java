@@ -10,13 +10,15 @@ public class TasksMap extends LinkedHashMap<Long, Task> {
         task5.setDone();
         Task task6 = new Task("Funktion: Tasks löschen.");
         task6.setDone();
+        Task task7 = new Task("Neue Task sollen unten erscheinen: -> sort by dates");
+        task7.setDone();
         taskMap.put(new Task("Security: Nur ein Admin kann einen Task anlegen / löschen"));
         taskMap.put(new Task("Datenbank Anschluss"));
         taskMap.put(new Task("Testing: Schreiben von Fluentlenium Tests"));
-        taskMap.put(new Task("Neue Task sollen unten erscheinen: -> sort by dates"));
         taskMap.put(new Task("multiple lists -> Drag'n'Drop??? (à la trello)"));
         taskMap.put(task5);
         taskMap.put(task6);
+        taskMap.put(task7);
         return taskMap;
     }
 
