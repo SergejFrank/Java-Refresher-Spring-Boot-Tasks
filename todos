@@ -1,7 +1,7 @@
 // ERWEITERUNG FÜR DEN ZWEITEN TAG ALS FREIWÄHLBARE ZUSATZAUFGABE?
 //todo Security: Nur ein Admin kann einen Task anlegen.
 //todo Database
-//todo selenium /unit tests
+//todo Fluentlenium /unit tests
 //todo multiple lists -> Drag'n'Drop??? (à la trello)
 
 
