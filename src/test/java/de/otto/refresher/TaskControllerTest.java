@@ -6,6 +6,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
+import static org.hamcrest.core.IsNot.not;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,17 +73,29 @@ public class TaskControllerTest extends FluentTest {
         submit("#submit_button");
 
         FluentList<FluentWebElement> webElements = find("li.todo-task");
-        ArrayList<String> todoTasks = new ArrayList<>();
         for (FluentWebElement element : webElements) {
             if (element.getText().equals("DoneMe")) {
-                element.find("button").click();
+                element.getElement().findElement( By.cssSelector("button")).click();
+            }
+        }
+
+        FluentList<FluentWebElement> webElementsDone = find("li.done-task");
+        ArrayList<String> doneTasks = new ArrayList<>();
+        for (FluentWebElement element : webElementsDone) {
+            if (element.getText().equals("DoneMe")) {
+                doneTasks.add(element.getText());
             }
 
+        }
 
+        webElements = find("li.todo-task");
+        ArrayList<String> todoTasks = new ArrayList<>();
+        for (FluentWebElement element : webElements) {
             todoTasks.add(element.getText());
         }
 
-        assertThat(todoTasks, hasItem("DoneMe"));
+        assertThat(doneTasks, hasItem("DoneMe"));
+        assertThat(todoTasks, not(hasItem("DoneMe")));
 
     }
 
