@@ -1,9 +1,16 @@
 package de.otto.refresher;
 
-/**
- * Created by Garrit Schröder on 16.02.16.
- * Email: GarritSidney.Schroeder@otto.de
- */
-public class TaskControllerTest {
+import org.fluentlenium.adapter.FluentTest;
+import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class TaskControllerTest extends FluentTest {
+    @Test
+    public void title_of_bing_should_contain_search_query_name() {
+        goTo("http://www.bing.com");
+        fill("#sb_form_q").with("FluentLenium");
+        submit("#sb_form_go");
+        assertThat("d",true);
+    }
 }
