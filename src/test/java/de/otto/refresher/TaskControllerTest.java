@@ -18,7 +18,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 
 
@@ -57,11 +56,39 @@ public class TaskControllerTest extends FluentTest {
 
         FluentList<FluentWebElement> webElements = find("li.todo-task");
         ArrayList<String> todoTasks = new ArrayList<>();
-        for (FluentWebElement element: webElements) {
+        for (FluentWebElement element : webElements) {
             todoTasks.add(element.getText());
         }
 
         assertThat(todoTasks, hasItem("FINDME"));
 
     }
+
+    @Test
+    public void setTaskDone() {
+        goTo(url());
+        fill(find(".add-todo")).with("DoneMe");
+        submit("#submit_button");
+
+        FluentList<FluentWebElement> webElements = find("li.todo-task");
+        ArrayList<String> todoTasks = new ArrayList<>();
+        for (FluentWebElement element : webElements) {
+            if (element.getText().equals("DoneMe")) {
+                element.find("button").click();
+            }
+
+
+            todoTasks.add(element.getText());
+        }
+
+        assertThat(todoTasks, hasItem("DoneMe"));
+
+    }
+
+    @Test
+    public void deleteTasks() {
+
+    }
+
+
 }
