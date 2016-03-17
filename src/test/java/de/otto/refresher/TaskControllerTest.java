@@ -1,5 +1,6 @@
 package de.otto.refresher;
 
+import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import de.otto.refresher.database.adapter.TaskRepository;
 import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.domain.FluentList;
@@ -89,6 +90,9 @@ public class TaskControllerTest extends FluentTest {
     }
 
     public ArrayList<String> getTasksByCSSSelector(String cssSelector) {
+        if(find("html").size() < 1){
+            throw new NullPointerException("Site not loaded");
+        }
         FluentList<FluentWebElement> webElementsDone = find(cssSelector);
         ArrayList<String> doneTasks = new ArrayList<>();
         for (FluentWebElement element : webElementsDone) {
@@ -105,5 +109,6 @@ public class TaskControllerTest extends FluentTest {
                 return;
             }
         }
+        throw new ElementNotFoundException(taskName,"","");
     }
 }
