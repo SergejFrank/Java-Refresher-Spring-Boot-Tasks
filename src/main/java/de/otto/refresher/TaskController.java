@@ -29,17 +29,30 @@ public class TaskController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String taskForm(Model model, @RequestParam(value = "sort", required = false) String sort) {
-        Sort.Direction direction = Sort.Direction.ASC;
-        if (sort != null) {
-            switch (sort) {
+    public String taskForm(Model model,
+                           @RequestParam(value = "sort-todo", required = false) String sortToDo,
+                           @RequestParam(value = "sort-done", required = false) String sortDone) {
+
+        Sort.Direction directionTodo = Sort.Direction.ASC;
+        if (sortToDo != null) {
+            switch (sortToDo) {
                 case "desc":
-                    direction = Sort.Direction.DESC;
+                    directionTodo = Sort.Direction.DESC;
             }
 
         }
-        model.addAttribute("notDoneTasks", taskRepository.findTaskByStatus(TaskStatus.TODO));
-        model.addAttribute("doneTasks", taskRepository.findTaskByStatus(TaskStatus.DONE, new Sort(direction, "finishedOn")));
+
+        Sort.Direction directionDone = Sort.Direction.DESC;
+        if (sortDone != null) {
+            switch (sortDone) {
+                case "asc":
+                    directionDone = Sort.Direction.ASC;
+            }
+
+        }
+
+        model.addAttribute("notDoneTasks", taskRepository.findTaskByStatus(TaskStatus.TODO,  new Sort(directionTodo, "createdOn")));
+        model.addAttribute("doneTasks", taskRepository.findTaskByStatus(TaskStatus.DONE, new Sort(directionDone, "finishedOn")));
         model.addAttribute("newTask", new Task());
         return "tasks";
     }
