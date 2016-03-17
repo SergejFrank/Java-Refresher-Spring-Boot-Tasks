@@ -53,6 +53,7 @@ public class Task {
 
     public void setDone() {
         this.status = TaskStatus.DONE;
+        setFinishedOn(new Date());
     }
 
     public void setUndone() {

@@ -5,6 +5,7 @@ import de.otto.refresher.buisness.TaskStatus;
 import de.otto.refresher.database.adapter.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,9 +29,17 @@ public class TaskController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String taskForm(Model model) {
+    public String taskForm(Model model, @RequestParam(value = "sort", required = false) String sort) {
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (sort != null) {
+            switch (sort) {
+                case "desc":
+                    direction = Sort.Direction.DESC;
+            }
+
+        }
         model.addAttribute("notDoneTasks", taskRepository.findTaskByStatus(TaskStatus.TODO));
-        model.addAttribute("doneTasks", taskRepository.findTaskByStatus(TaskStatus.DONE));
+        model.addAttribute("doneTasks", taskRepository.findTaskByStatus(TaskStatus.DONE, new Sort(direction, "finishedOn")));
         model.addAttribute("newTask", new Task());
         return "tasks";
     }
