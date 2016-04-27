@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `test-java-refresher-task`;
 CREATE DATABASE IF NOT EXISTS `test-java-refresher-task` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `test-java-refresher-task`;
 

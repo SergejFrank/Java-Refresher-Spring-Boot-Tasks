@@ -100,7 +100,10 @@
                     <url>jdbc:mysql://localhost:3306</url>
                     <user>root</user>
                     <password></password>
-                    <schemas>initialize</schemas>
+                    <schemas>
+                        <schema>liveDB</schema>
+                        <schema>testDB</schema>
+                    </schemas>
                 </configuration>
                 <dependencies>
                     <dependency>
