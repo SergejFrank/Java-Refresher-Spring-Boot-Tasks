@@ -51,7 +51,7 @@
 
             <#list progressTasks as progressTask>
                 <form action="/done" method="POST">
-                    <li class="todo-task task">
+                    <li class="progress-task task">
                     ${progressTask.message}
                         <input type="hidden" name="id" value="${progressTask.id?c}">
                         <button type="submit" class="remove-item btn btn-default btn-xs pull-right"><span

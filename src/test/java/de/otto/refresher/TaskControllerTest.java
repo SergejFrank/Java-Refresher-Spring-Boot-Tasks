@@ -43,6 +43,7 @@ public class TaskControllerTest extends FluentTest {
 
     private String taskCssSelector = "li.task";
     private String todoTaskCssSelector = "li.todo-task";
+    private String progressTaskCssSelector = "li.progress-task";
     private String doneTaskCssSelector = "li.done-task";
 
     @Before
@@ -68,10 +69,19 @@ public class TaskControllerTest extends FluentTest {
     }
 
     @Test
+    public void setTaskProgress() {
+        addNewTask("progressMe");
+        clickButtonByTaskName("progressMe");
+        assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("progressMe")));
+        assertThat(getTasksByCSSSelector(progressTaskCssSelector), hasItem("progressMe"));
+    }
+
+    @Test
     public void setTaskDone() {
         addNewTask("DoneMe");
         clickButtonByTaskName("DoneMe");
-        assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("DoneMe")));
+        clickButtonByTaskName("DoneMe");
+        assertThat(getTasksByCSSSelector(progressTaskCssSelector), not(hasItem("DoneMe")));
         assertThat(getTasksByCSSSelector(doneTaskCssSelector), hasItem("DoneMe"));
     }
 
@@ -80,7 +90,9 @@ public class TaskControllerTest extends FluentTest {
         addNewTask("DeleteMe");
         clickButtonByTaskName("DeleteMe");
         clickButtonByTaskName("DeleteMe");
+        clickButtonByTaskName("DeleteMe");
         assertThat(getTasksByCSSSelector(todoTaskCssSelector), not(hasItem("DeleteMe")));
+        assertThat(getTasksByCSSSelector(progressTaskCssSelector), not(hasItem("DeleteMe")));
         assertThat(getTasksByCSSSelector(doneTaskCssSelector), not(hasItem("DeleteMe")));
     }
 
