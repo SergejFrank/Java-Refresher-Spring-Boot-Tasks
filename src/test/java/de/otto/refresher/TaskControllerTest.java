@@ -1,6 +1,5 @@
 package de.otto.refresher;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import de.otto.refresher.database.adapter.TaskRepository;
 import org.fluentlenium.adapter.FluentTest;
 import org.fluentlenium.core.domain.FluentList;
@@ -9,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +109,6 @@ public class TaskControllerTest extends FluentTest {
                 return;
             }
         }
-        throw new ElementNotFoundException(taskName,"","");
+        throw new NotFoundException(taskName);
     }
 }
