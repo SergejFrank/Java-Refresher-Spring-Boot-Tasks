@@ -1,7 +1,13 @@
 package de.otto.refresher.buisness;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "task")
@@ -54,6 +60,10 @@ public class Task {
     public void setDone() {
         this.status = TaskStatus.DONE;
         setFinishedOn(new Date());
+    }
+
+    public void setInProgress() {
+        this.status = TaskStatus.PROGRESS;
     }
 
     public void setUndone() {

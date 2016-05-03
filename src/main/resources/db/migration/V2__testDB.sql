@@ -7,11 +7,12 @@ DROP TABLE IF EXISTS `task`;
 CREATE TABLE `task` (
   `id` int(20) NOT NULL,
   `message` varchar(255) NOT NULL,
-  `status` enum('TODO','DONE','DELETED') NOT NULL,
+  `status` enum('TODO','DONE','DELETED','PROGRESS' NOT NULL,
   `created_on` datetime DEFAULT NULL,
   `finished_on` datetime DEFAULT NULL,
   `due_to` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 ALTER TABLE `task`
