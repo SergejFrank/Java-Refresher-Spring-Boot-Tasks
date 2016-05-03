@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-md-4 flex">
-        <div class="progresslist not-done">
+        <div class="todolist not-done">
             <h1>In Progress</h1>
 
 
